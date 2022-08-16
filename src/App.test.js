@@ -33,7 +33,22 @@ test("plus button should showing +", () => {
   expect(plusButtonElement).toHaveTextContent("+");
 });
 // 4. +버튼을 누르면 카운터 숫자 1로 바뀜
+
+test("click + button then counter setting 1", () => {
+  render(<App />);
+  const plusButtonElement = screen.getByTestId("plus-button");
+  fireEvent.click(plusButtonElement); // 클릭 이벤트 발생
+  const counterElement = screen.getByTestId("counter");
+  expect(counterElement).toHaveTextContent(1);
+});
 // 5. -버튼 누르면 카운터 숫자 -1로 바뀜
+test("click - button then counter setting 1", () => {
+  render(<App />);
+  const minusButtonElement = screen.getByTestId("minus-button");
+  fireEvent.click(minusButtonElement); // 클릭 이벤트 발생
+  const counterElement = screen.getByTestId("counter");
+  expect(counterElement).toHaveTextContent(-1);
+});
 // 6. on/off 버튼은 파란색인가?
 test("on/off button is blue", () => {
   render(<App />);
@@ -41,3 +56,10 @@ test("on/off button is blue", () => {
   expect(onOffButton).toHaveStyle({ backgroundColor: "blue" });
 });
 // 7. on/off 버튼이 눌렸을 때 -,+버튼 disabled됐는지 확인
+test("when on/off Button Clicked, disabled -/+ button", () => {
+  render(<App />);
+  const onOffButton = screen.getByTestId("on/off-button");
+  fireEvent.click(onOffButton);
+  const plusButtonElement = screen.getByTestId("plus-button");
+  expect(plusButtonElement).toBeDisabled();
+});
