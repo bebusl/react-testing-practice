@@ -20,13 +20,17 @@ function Index() {
   return (
     <div>
       <button
-        style={{ backgroundColor: buttonColor, color: "white" }}
+        style={{
+          backgroundColor: disabled ? "gray" : buttonColor,
+          color: "white",
+        }}
         onClick={() => setButtonColor(newButtonColor)}
         disabled={disabled}
       >
         Change to {newButtonColor}
       </button>
       <br />
+      <label htmlFor="enable-button-checkbox">Disable Button</label>
       <input
         type="checkbox"
         id="enable-button-checkbox"

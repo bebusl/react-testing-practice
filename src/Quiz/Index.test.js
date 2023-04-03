@@ -37,7 +37,8 @@ test("checkbox clicking", () => {
   //twice click => checkbox는 not checked, button은 enable
   render(<Index />);
   const colorButton = screen.getByRole("button", { name: "Change to blue" });
-  const checkBox = screen.getByRole("checkbox");
+  const checkBox = screen.getByRole("checkbox", { name: "Disable Button" });
+  // checkbox에 label을 붙여주면, name에 label값을 넣어서 checkbox를 특정하기 더 쉬워짐
 
   fireEvent.click(checkBox);
   expect(checkBox).toBeChecked();
@@ -46,4 +47,19 @@ test("checkbox clicking", () => {
   fireEvent.click(checkBox);
   expect(checkBox).not.toBeChecked();
   expect(colorButton).toBeEnabled();
+});
+
+test("buttons color to be gray when button disabled", () => {
+  // 1. 체크박스 클릭 - 버튼 disable -> button is gray -> enable button -> button is red
+  // 2. click button to change color -> disable button -> button is gray
+  // 3. enable button -> button is blue => 세 가지 흐름 끝날때마다 Assertion을 넣어주면 됨
+
+  render(<Index />);
+  const colorButton = screen.getByRole("button", { name: "Change to blue" });
+  const checkBox = screen.getByRole("checkbox", { name: "Disable Button" });
+
+  fireEvent.click(checkBox);
+  expect(colorButton).toHaveStyle({ backgroundColor: "gray" });
+  fireEvent.click(checkBox);
+  expect(colorButton).toHaveStyle({ backgroundColor: "red" });
 });
