@@ -1,5 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import App from "./App";
+import { replaceCamelWithSpaces } from "./App";
 
 //test 상황
 // 1. 카운터 초기 : 0
@@ -62,4 +63,19 @@ test("when on/off Button Clicked, disabled -/+ button", () => {
   fireEvent.click(onOffButton);
   const plusButtonElement = screen.getByTestId("plus-button");
   expect(plusButtonElement).toBeDisabled();
+});
+
+// describe문은 테스트를 그룹으로 묶음
+describe("spaces beforecamel-case capital letters", () => {
+  test("Works for no inner capital letters", () => {
+    expect(replaceCamelWithSpaces("Red")).toBe("Red");
+  });
+
+  test("Works for one inner capital letter", () => {
+    expect(replaceCamelWithSpaces("MidnightBlue")).toBe("Midnight Blue");
+  });
+
+  test("Works for multiple inner capital letter", () => {
+    expect(replaceCamelWithSpaces("MediumVioletRed")).toBe("Medium Violet Red");
+  });
 });
