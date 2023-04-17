@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ScoopOption from "./ScoopOption";
 import { Row } from "react-bootstrap";
+import ToppingOption from "./ToppingOption";
 
 /**
  * @param {{optionType:'scoops' | 'toppings'}} optionType 둘 중에 하나여야만 함*/
@@ -17,7 +18,7 @@ function Options({ optionType = "scoops" }) {
       });
   }, [optionType]);
 
-  const ItemComponent = optionType === "scoops" ? ScoopOption : null;
+  const ItemComponent = optionType === "scoops" ? ScoopOption : ToppingOption;
 
   const optionItems = items.map((item) => (
     <ItemComponent

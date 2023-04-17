@@ -20,3 +20,11 @@ test("displays image for each scoop option from server", async () => {
   expect(altText).toEqual(["Chocolate scoop", "Vanilla scoop"]);
   // msw는 setupTests에서 설정해주고 있음.
 });
+
+test("displays image for each topping option from server", async () => {
+  render(<Options optionType="toppings" />);
+  const toppingImages = await screen.findAllByRole("img", {
+    name: /topping$/i,
+  });
+  expect(toppingImages).toHaveLength(3);
+});
